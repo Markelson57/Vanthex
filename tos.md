@@ -66,4 +66,6 @@ Estas Condiciones se rigen por la legislación vigente en España.
 ## 10. Contacto
 
 Creador: MARKELSON
-Soporte: vía Discord
+Soporte: x_markelson
+
+Al usar el bot, aceptas estas condiciones.
