@@ -28,7 +28,7 @@ if not TOKEN:
 DB_FILE = "guardian_db.json"
 WINDOW = 10
 RECENT_JOIN_CACHE = 100
-HELP_PREFIX = "!ghelp"
+HELP_PREFIX = "v!help"
 
 logging.basicConfig(
     level=logging.INFO,
@@ -115,8 +115,8 @@ HELP_SECTIONS = {
         "title": "Ayuda General",
         "description": "Comandos informativos y de ayuda.",
         "entries": [
-            ("!ghelp", "Abre esta ayuda interactiva por prefijo.", "!ghelp"),
-            ("/ghelp", "Abre la ayuda interactiva en slash.", "/ghelp"),
+            ("v!help", "Abre esta ayuda interactiva por prefijo.", "!ghelp"),
+            ("/help", "Abre la ayuda interactiva en slash.", "/ghelp"),
             ("/status", "Muestra el estado actual del bot.", "/status"),
             ("/dashboard", "Resumen rapido de protecciones y metricas.", "/dashboard"),
             ("/riskscore", "Calcula el riesgo actual del servidor.", "/riskscore"),
@@ -196,7 +196,7 @@ intents.members = True
 intents.message_content = True
 intents.guilds = True
 
-bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
+bot = commands.Bot(command_prefix="v!", intents=intents, help_command=None)
 
 
 def load_db():
@@ -744,7 +744,7 @@ async def on_ready():
     except discord.HTTPException as exc:
         logger.error("No se pudieron sincronizar slash commands: %s", exc)
 
-    await bot.change_presence(activity=discord.Game(name="Guardian Mode"), status=discord.Status.online)
+    await bot.change_presence(activity=discord.Game(name="v!help for config"), status=discord.Status.online)
 
 
 @bot.event
@@ -988,7 +988,7 @@ async def on_app_command_error(interaction: discord.Interaction, error: app_comm
     await sender("Ocurrio un error al ejecutar el comando.", ephemeral=True)
 
 
-@bot.command(name="ghelp")
+@bot.command(name="help")
 async def prefix_help(ctx: commands.Context):
     view = HelpCenterView(ctx.guild)
     await ctx.send(embed=build_help_embed("general"), view=view)
